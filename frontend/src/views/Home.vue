@@ -1,9 +1,8 @@
 <template>
-
-  <v-container fluid>
-    <v-flex class="md4 offset-md4">
-      <h1 class="text-xs-center">Police Press Release Search</h1>
-      <search-form/>
+  <v-container fill-height>
+    <v-flex class="md6 offset-md3">
+      <h1 class="text-xs-center mb-5">Police Press Release Search</h1>
+      <u-r-l-search/>
     </v-flex>
   </v-container>
 </template>
@@ -27,7 +26,8 @@ a {
 </style>
 <script>
 import SearchForm from '../components/SearchForm'
+import URLSearch from '../components/URLSearch'
 export default {
-  components: {SearchForm}
+  components: {URLSearch, SearchForm}
 }
 </script>

@@ -1,8 +1,13 @@
 .DS_Store
 node_modules
 /dist
+
+
+# python
 .venv
 .ipynb_checkpoints
+__pycache__
+.conf.py
 
 # local env files
 .env.local
