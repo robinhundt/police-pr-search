@@ -14,6 +14,9 @@ FROM python:3.6-alpine
 
 WORKDIR /code
 
+RUN apk update \
+  && apk add --virtual build-deps gcc python3-dev musl-dev curl 
+
 COPY requirements.txt .
 
 RUN pip install -r requirements.txt && rm -rf /root/.cache
