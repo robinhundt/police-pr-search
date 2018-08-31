@@ -10,12 +10,12 @@ COPY frontend/ .
 RUN yarn build
 
 
-FROM python:3.6-alpine
+FROM python:3.6
 
 WORKDIR /code
 
 RUN apk update \
-  && apk add --virtual build-deps gcc python3-dev musl-dev curl 
+  && apk add --virtual build-deps gcc python3-dev musl-dev curl
 
 COPY requirements.txt .
 
