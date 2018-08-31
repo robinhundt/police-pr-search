@@ -1,0 +1,30 @@
+# Common
+.git
+Dockerfile
+
+# python
+*/db.sqlite3
+*/__pycache__*
+*.pyc
+*.pyo
+*.pyd
+*/env*
+.venv
+.ipynb_checkpoints
+pip-log.txt
+pip-delete-this-directory.txt
+.tox
+.coverage
+.coverage.*
+.cache
+coverage.xml
+*,cover
+*.log
+static/
+public/
+
+
+# node
+*/node_modules
+*/npm-debug.log
+*/dist

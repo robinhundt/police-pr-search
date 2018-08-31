@@ -1,6 +1,7 @@
 import json
+import os
 
-from flask import Flask, request, jsonify
+from flask import Flask, request, jsonify, render_template
 from newspaper import Article
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
@@ -10,13 +11,15 @@ import spacy
 
 from query_builder import ArticleQueryBuilder
 
-with open('backend/conf.json') as f:
-    conf = json.load(f)
+elastic_host = os.environ['ELASTIC_HOST'] if \
+            'ElASTIC_HOST' in os.environ else 'localhost'
 
-app = Flask(__name__)
+app = Flask(__name__,
+            static_folder="./frontend/dist/static",
+            template_folder="./frontend/dist")
 CORS(app)
 
-client = Elasticsearch(hosts=conf['host'], timeout=20)
+client = Elasticsearch(hosts=elastic_host, timeout=10)
 nlp = spacy.load('de')
 
 def transform_response(elastic_response):
@@ -37,8 +40,8 @@ def get_locations_from_article(article):
     doc = nlp(article.text)
     return " ".join([str(ent) for ent in doc.ents if ent.label_ == "LOC"])
 
-@app.route('/', methods=['POST'])
-def hello():
+@app.route('/api', methods=['POST'])
+def api():
     req_data = request.get_json()
     url = req_data['url']
     article = Article(url=url, language='de')
@@ -59,3 +62,9 @@ def hello():
     res = search.query(query).execute()
 
     return jsonify(transform_response(res))
+
+
+@app.route('/', defaults={'path': ''})
+@app.route('/<path:path>')
+def index():
+    return render_template("index.html")

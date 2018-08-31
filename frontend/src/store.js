@@ -4,8 +4,16 @@ import axios from 'axios'
 
 Vue.use(Vuex)
 
+function getInstanceBaseUrl () {
+  if (process.env.NODE_ENV === 'production') {
+    return `https://${window.location.host}${window.location.pathname}`
+  } else {
+    return 'http://localhost:5000/'
+  }
+}
+
 let ax = axios.create({
-  baseURL: 'http://localhost:5000/'
+  baseURL: getInstanceBaseUrl()
 })
 
 function initialState () {
@@ -27,7 +35,7 @@ export default new Vuex.Store({
   },
   actions: {
     searchByUrl: async function ({state, commit}) {
-      let res = await ax.post('/', {url: state.url})
+      let res = await ax.post('/api', {url: state.url})
       commit('SET_RESULTS', res.data)
     }
   }

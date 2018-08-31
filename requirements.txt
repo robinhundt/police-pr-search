@@ -1,0 +1,7 @@
+elasticsearch~=6.3.1
+elasticsearch-dsl~=6.2.1
+newspaper3k~=0.2.7
+spacy~=2.0.12
+Flask~=1.0.2
+Flask-Cors~=3.0.6
+gunicorn~=19.9.0
