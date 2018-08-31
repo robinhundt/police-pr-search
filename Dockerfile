@@ -23,4 +23,5 @@ COPY . .
 COPY --from=node /app/dist /code/frontend/dist
 
 
+RUN chmod +x deploy.sh
 CMD ["./deploy.sh"]
