@@ -25,12 +25,21 @@ services:
     restart: always
     environment:
       - ELASTIC_HOST=elasticsearch
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
+    labels:
+      - "traefik.docker.network=web"
+      - "traefik.enable=true"
+      - "traefik.basic.frontend.rule=Host:police-pr-search.robin-in.space"
+      - "traefik.basic.port=8000"
+      - "traefik.basic.protocol=http"
     networks:
+      - web
       - police-pr
 
 
 networks:
   police-pr:
     driver: bridge
+  web:
+    external: true
