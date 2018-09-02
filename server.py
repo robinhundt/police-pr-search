@@ -6,18 +6,21 @@ from newspaper import Article
 from elasticsearch import Elasticsearch
 from elasticsearch_dsl import Search, Q
 from flask_cors import CORS
+from whitenoise import WhiteNoise
 
 import spacy
 
 from query_builder import ArticleQueryBuilder
 
 elastic_host = os.environ['ELASTIC_HOST'] if \
-            'ElASTIC_HOST' in os.environ else 'localhost'
+            'ELASTIC_HOST' in os.environ else 'localhost'
 
 app = Flask(__name__,
-            static_folder="./frontend/dist/static",
+            static_folder="./frontend/dist/",
             template_folder="./frontend/dist")
+app.wsgi_app = WhiteNoise(app.wsgi_app, root='frontend/dist')
 CORS(app)
+
 
 client = Elasticsearch(hosts=elastic_host, timeout=10)
 nlp = spacy.load('de')
@@ -64,7 +67,6 @@ def api():
     return jsonify(transform_response(res))
 
 
-@app.route('/', defaults={'path': ''})
-@app.route('/<path:path>')
+@app.route('/')
 def index():
     return render_template("index.html")

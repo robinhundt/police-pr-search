@@ -6,9 +6,9 @@ Vue.use(Vuex)
 
 function getInstanceBaseUrl () {
   if (process.env.NODE_ENV === 'production') {
-    return `https://${window.location.host}${window.location.pathname}`
+    return `${window.location.protocol}//${window.location.host}${window.location.pathname}`
   } else {
-    return 'http://localhost:5000/'
+    return 'http://localhost:8000/'
   }
 }
 
