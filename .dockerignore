@@ -28,3 +28,7 @@ public/
 */node_modules
 */npm-debug.log
 */dist
+
+# data
+data/
+police-pr-elastic-data/

@@ -23,6 +23,8 @@ services:
     depends_on:
       - elasticsearch
     restart: always
+    environment:
+      - ELASTIC_HOST=elasticsearch
     ports:
       - 8000:8000
     networks:
