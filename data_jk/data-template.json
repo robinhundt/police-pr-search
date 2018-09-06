@@ -1,0 +1,22 @@
+{
+  "topic": "the topic",
+  "data": [
+    {
+      "articles": [
+        {
+          "title": "",
+          "body": "",
+          "location": "",
+          "date": "",
+          "url": ""
+        }
+      ],
+      "pr-ids": [
+        {
+          "id":"",
+          "score": ""
+        }
+      ]
+    }
+  ]
+}
